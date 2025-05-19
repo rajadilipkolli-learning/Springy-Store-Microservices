@@ -6,7 +6,8 @@ import com.siriusxi.ms.store.revs.persistence.ReviewEntity;
 import com.siriusxi.ms.store.revs.persistence.ReviewRepository;
 import com.siriusxi.ms.store.util.exceptions.InvalidInputException;
 import com.siriusxi.ms.store.util.http.ServiceUtil;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,8 +21,9 @@ import java.util.function.Supplier;
 import static java.util.logging.Level.FINE;
 
 @Service("ReviewServiceImpl")
-@Log4j2
 public class ReviewServiceImpl implements ReviewService {
+
+  private static final Logger log = LogManager.getLogger(ReviewServiceImpl.class);
 
   private final ReviewRepository repository;
   private final ReviewMapper mapper;
