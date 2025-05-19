@@ -17,10 +17,6 @@
     <description>OAuth2 Authorization Server, based on Spring boot.</description>
     <packaging>jar</packaging>
 
-    <properties>
-        <spring.security.jwt.jose.version>5.0.0.BUILD-SNAPSHOT</spring.security.jwt.jose.version>
-    </properties>
-
     <dependencies>
         <!-- Start - To register API Gateway server with Eureka Discovery Server -->
         <dependency>
@@ -41,8 +37,7 @@
 
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt-jose</artifactId>
-            <version>${spring.security.jwt.jose.version}</version>
+            <artifactId>spring-security-oauth2-jose</artifactId>
         </dependency>
 
         <!-- Start - Cloud config server dependencies -->
