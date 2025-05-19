@@ -2,7 +2,8 @@ package com.siriusxi.ms.store.util.http;
 
 import com.siriusxi.ms.store.util.exceptions.InvalidInputException;
 import com.siriusxi.ms.store.util.exceptions.NotFoundException;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,8 +27,9 @@ import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
  * @since v0.1
  */
 @RestControllerAdvice
-@Log4j2
 class GlobalControllerExceptionHandler {
+
+  private static final Logger log = LogManager.getLogger(GlobalControllerExceptionHandler.class);
 
   /**
    * Method to handle <i>not found exceptions</i> http error info.

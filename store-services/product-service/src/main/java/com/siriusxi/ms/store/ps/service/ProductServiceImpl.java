@@ -6,7 +6,8 @@ import com.siriusxi.ms.store.ps.persistence.ProductRepository;
 import com.siriusxi.ms.store.util.exceptions.InvalidInputException;
 import com.siriusxi.ms.store.util.exceptions.NotFoundException;
 import com.siriusxi.ms.store.util.http.ServiceUtil;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,9 @@ import java.util.Random;
 import static reactor.core.publisher.Mono.error;
 
 @Service("ProductServiceImpl")
-@Log4j2
 public class ProductServiceImpl implements ProductService {
+
+  private static final Logger log = LogManager.getLogger(ProductServiceImpl.class);
 
   private final ServiceUtil serviceUtil;
 

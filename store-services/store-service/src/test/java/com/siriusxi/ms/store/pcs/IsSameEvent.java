@@ -5,7 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.siriusxi.ms.store.api.event.Event;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -14,8 +15,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Log4j2
 class IsSameEvent extends TypeSafeMatcher<String> {
+
+  private static final Logger log = LogManager.getLogger(IsSameEvent.class);
 
   private final ObjectMapper mapper = new ObjectMapper();
 

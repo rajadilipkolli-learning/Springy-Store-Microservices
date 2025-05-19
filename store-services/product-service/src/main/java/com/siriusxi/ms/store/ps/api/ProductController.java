@@ -3,7 +3,8 @@ package com.siriusxi.ms.store.ps.api;
 import com.siriusxi.ms.store.api.core.product.ProductEndpoint;
 import com.siriusxi.ms.store.api.core.product.ProductService;
 import com.siriusxi.ms.store.api.core.product.dto.Product;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +20,9 @@ import reactor.core.publisher.Mono;
  * @since v3.0 codename Storm
  */
 @RestController
-@Log4j2
 public class ProductController implements ProductEndpoint {
+
+  private static final Logger log = LogManager.getLogger(ProductController.class);
 
   /** Product service business logic interface. */
   private final ProductService prodService;

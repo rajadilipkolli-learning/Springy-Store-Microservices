@@ -4,7 +4,8 @@ import com.siriusxi.ms.store.api.core.recommendation.RecommendationService;
 import com.siriusxi.ms.store.api.core.recommendation.dto.Recommendation;
 import com.siriusxi.ms.store.api.event.Event;
 import com.siriusxi.ms.store.util.exceptions.EventProcessingException;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -14,8 +15,9 @@ import org.springframework.cloud.stream.messaging.Sink;
 import static java.lang.String.*;
 
 @EnableBinding(Sink.class)
-@Log4j2
 public class MessageProcessor {
+
+    private static final Logger log = LogManager.getLogger(MessageProcessor.class);
 
     private final RecommendationService service;
 

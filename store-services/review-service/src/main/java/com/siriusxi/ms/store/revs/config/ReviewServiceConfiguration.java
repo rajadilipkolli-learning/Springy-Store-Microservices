@@ -1,6 +1,7 @@
 package com.siriusxi.ms.store.revs.config;
 
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +11,9 @@ import reactor.core.scheduler.Schedulers;
 import java.util.concurrent.Executors;
 
 @Configuration
-@Log4j2
 public class ReviewServiceConfiguration {
+
+    private static final Logger log = LogManager.getLogger(ReviewServiceConfiguration.class);
 
     @Value("${spring.datasource.hikari.maximum-pool-size:10}")
     Integer connectionPoolSize;
