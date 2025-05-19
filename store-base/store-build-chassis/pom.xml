@@ -42,13 +42,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Start - API documentation with Swagger -->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox.swagger.version}</version>
-            </dependency>
-            <!-- End - API documentation with Swagger -->
+            <!-- Removed springfox-swagger2 dependency management. Springdoc OpenAPI is managed per module. -->
             <!-- Start - Spring cloud dependencies -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

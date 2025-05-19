@@ -37,8 +37,10 @@
     <dependencies>
         <!-- Start - API documentation dependencies -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webflux-ui</artifactId>
+            <version>1.8.0</version>
         </dependency>
+        <!-- End - API documentation dependencies -->
     </dependencies>
 </project>
