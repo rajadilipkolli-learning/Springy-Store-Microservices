@@ -13,7 +13,8 @@ import com.siriusxi.ms.store.util.exceptions.NotFoundException;
 import com.siriusxi.ms.store.util.http.ServiceUtil;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerOpenException;
 import io.github.resilience4j.reactor.retry.RetryExceptionWrapper;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextImpl;
@@ -31,8 +32,9 @@ import java.util.stream.Collectors;
 import static org.springframework.security.core.context.ReactiveSecurityContextHolder.getContext;
 
 @Service("StoreServiceImpl")
-@Log4j2
 public class StoreServiceImpl implements StoreService {
+
+  private static final Logger log = LogManager.getLogger(StoreServiceImpl.class);
 
   private final ServiceUtil serviceUtil;
   private final StoreIntegration integration;

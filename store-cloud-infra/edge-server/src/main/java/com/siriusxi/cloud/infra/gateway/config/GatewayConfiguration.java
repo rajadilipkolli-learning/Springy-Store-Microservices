@@ -1,6 +1,7 @@
 package com.siriusxi.cloud.infra.gateway.config;
 
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.CompositeReactiveHealthContributor;
 import org.springframework.boot.actuate.health.Health;
@@ -15,8 +16,9 @@ import java.util.Map;
 
 // TODO add swagger API
 @Configuration
-@Log4j2
 public class GatewayConfiguration {
+
+  private static final Logger log = LogManager.getLogger(GatewayConfiguration.class);
 
   private final WebClient.Builder webClientBuilder;
 

@@ -13,7 +13,8 @@ import com.siriusxi.ms.store.util.exceptions.NotFoundException;
 import com.siriusxi.ms.store.util.http.HttpErrorInfo;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -38,8 +39,9 @@ import static reactor.core.publisher.Flux.empty;
 
 @EnableBinding(MessageSources.class)
 @Component
-@Log4j2
 public class StoreIntegration implements ProductService, RecommendationService, ReviewService {
+
+  private static final Logger log = LogManager.getLogger(StoreIntegration.class);
 
   private final String PRODUCT_ID_QUERY_PARAM = "?productId=";
   private final WebClient.Builder webClientBuilder;
