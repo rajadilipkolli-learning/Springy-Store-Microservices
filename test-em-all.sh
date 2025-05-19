@@ -182,7 +182,7 @@ function testCircuitBreaker() {
 
     echo "Start Circuit Breaker tests!"
 
-    EXEC="docker run --rm -it --network=ssm_default alpine"
+    EXEC="docker run --rm --network=ssm_default alpine"
 
     # First, use the health - endpoint to verify that the circuit breaker is closed
     assertEqual "CLOSED" "$(${EXEC} wget store:8080/actuator/health -qO - | \
@@ -252,10 +252,10 @@ echo "PORT=${PORT}"
 if [[ $@ == *"start"* ]]
 then
     echo "Restarting the test environment..."
-    echo "$ docker-compose -p ssm down --remove-orphans"
-    docker-compose -p ssm down --remove-orphans
-    echo "$ docker-compose -p ssm up -d"
-    docker-compose -p ssm up -d
+    echo "$ docker compose -p ssm down --remove-orphans"
+    docker compose -p ssm down --remove-orphans
+    echo "$ docker compose -p ssm up -d"
+    docker compose -p ssm up -d
 fi
 
 waitForService curl -k https://${HOST}:${PORT}/actuator/health
@@ -320,6 +320,6 @@ echo "End, all tests OK:" `date`
 if [[ $@ == *"stop"* ]]
 then
     echo "We are done, stopping the test environment..."
-    echo "$ docker-compose -p ssm down --remove-orphans"
-    docker-compose -p ssm down --remove-orphans
+    echo "$ docker compose -p ssm down --remove-orphans"
+    docker compose -p ssm down --remove-orphans
 fi
