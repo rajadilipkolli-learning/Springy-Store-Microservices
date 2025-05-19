@@ -182,7 +182,7 @@ function testCircuitBreaker() {
 
     echo "Start Circuit Breaker tests!"
 
-    EXEC="docker run --rm -it --network=ssm_default alpine"
+    EXEC="docker run --rm --network=ssm_default alpine"
 
     # First, use the health - endpoint to verify that the circuit breaker is closed
     assertEqual "CLOSED" "$(${EXEC} wget store:8080/actuator/health -qO - | \
