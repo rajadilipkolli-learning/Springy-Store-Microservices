@@ -189,5 +189,5 @@ services:
     depends_on:
       - rabbitmq
     restart: on-failure
-  ## Start - Zipkin Distributed Tracking visualizer
+  ## End - Zipkin Distributed Tracking visualizer
   # End - Data and transport Infrastructure
