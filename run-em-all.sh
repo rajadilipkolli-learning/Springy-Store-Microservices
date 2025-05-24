@@ -1,12 +1,27 @@
 #!/usr/bin/env bash
 ## Author: Mohamed Taman
-## version: v4.2
-#### FIXME need to start up infra structure database and message services
-echo -e "Starting [Springy Store] μServices ....\n\
+## version: v4.3
+
+echo -e "Starting [Springy Store] Infrastructure Services....\n\
+---------------------------------------\n"
+
+# Check if Docker is running
+if ! docker info > /dev/null 2>&1; then
+    echo "Docker is not running. Please start Docker and try again."
+    exit 1
+fi
+
+# Start infrastructure services using docker-compose
+echo "Starting MongoDB, MySQL, zipkin and RabbitMQ..."
+docker compose up -d mongodb mysql zipkin rabbitmq
+echo "Waiting for infrastructure services to be healthy..."
+sleep 10
+
+echo -e "\nStarting [Springy Store] μServices ....\n\
 ---------------------------------------\n"
 
 function runService(){
-   ./mvnw --quiet spring-boot:run -Dspring-boot.run.jvmArguments="--enable-preview" -pl $1
+   ./mvnw --quiet compile spring-boot:run -Dspring-boot.run.jvmArguments="--enable-preview" -pl $1
 }
 
 for dir in `find  store-services/*-service -maxdepth 0 -type d`
