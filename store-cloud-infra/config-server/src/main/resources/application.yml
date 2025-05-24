@@ -7,6 +7,8 @@ server:
 spring:
     profiles.active: native
     application.name: config-server
+    config:
+        import: configserver:http://${CONFIG_SERVER_USR}:${CONFIG_SERVER_PWD}@${app.config-server.host}:${app.config-server.port}
     cloud.config:
         server.native.searchLocations: file:@parent.basedir@/../config/repo
         fail-fast: true
