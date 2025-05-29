@@ -1,6 +1,6 @@
 package com.siriusxi.cloud.infra.cs;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,6 +13,6 @@ class CentralizedConfigServerTests {
 
   @Test
   void contextLoads() {
-    Assert.assertTrue(true);
+    Assertions.assertTrue(true);
   }
 }

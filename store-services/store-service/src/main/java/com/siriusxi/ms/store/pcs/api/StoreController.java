@@ -5,7 +5,6 @@ import com.siriusxi.ms.store.api.composite.StoreService;
 import com.siriusxi.ms.store.api.composite.dto.ProductAggregate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -18,7 +17,6 @@ public class StoreController implements StoreEndpoint {
   /** Store service business logic interface. */
   private final StoreService storeService;
 
-  @Autowired
   public StoreController(@Qualifier("StoreServiceImpl") StoreService storeService) {
     this.storeService = storeService;
   }

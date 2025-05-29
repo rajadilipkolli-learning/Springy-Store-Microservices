@@ -5,7 +5,6 @@ import com.siriusxi.ms.store.api.core.recommendation.RecommendationService;
 import com.siriusxi.ms.store.api.core.recommendation.dto.Recommendation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
@@ -27,7 +26,6 @@ public class RecommendationController implements RecommendationEndpoint {
   /** Recommendation service business logic interface. */
   private final RecommendationService recommendationService;
 
-  @Autowired
   public RecommendationController(
       @Qualifier("RecommendationServiceImpl") RecommendationService recommendationService) {
     this.recommendationService = recommendationService;
