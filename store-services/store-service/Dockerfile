@@ -1,7 +1,7 @@
 #### Start of builder image
 # ------------------------
 # Builder stage to prepare application for final image
-FROM openjdk:15-slim-buster as builder
+FROM openjdk:17-slim-buster as builder
 WORKDIR temp
 
 # Could be set to different jar file location
@@ -11,13 +11,13 @@ ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} application.jar
 
 # Extract the jar file layers
-RUN java -Djarmode=layertools -jar --enable-preview application.jar extract
+RUN java -Djarmode=layertools -jar application.jar extract
 #### End of builder stage
 
 #### Start of actual image
 # ------------------------
-# Build image based on latest JDK 15 base image, based on latest debian buster OS
-FROM openjdk:15-slim-buster
+# Build image based on latest JDK 17 base image, based on latest debian buster OS
+FROM openjdk:17-slim-buster
 
 # Set image information, but could be set to different location from command line
 ARG IMAGE_VERSION="0.0.1-SNAPSHOT"
