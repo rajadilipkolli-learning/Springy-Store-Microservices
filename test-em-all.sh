@@ -210,9 +210,9 @@ function testCircuitBreaker() {
     assertCurl 404 "curl -k https://${HOST}:${PORT}${BASE_URL}/$PROD_ID_NOT_FOUND $AUTH -s"
     assertEqual "Product Id: $PROD_ID_NOT_FOUND not found in fallback cache!" "$(echo ${RESPONSE} | jq -r .message)"
 
-    # Wait for the circuit breaker to transition to the half open state (i.e. max 10 sec)
-    echo "Will sleep for 15 sec waiting for the CB to go Half Open..."
-    sleep 15
+    # Wait for the circuit breaker to transition to the half open state (i.e. max 25 sec)
+    echo "Will sleep for 25 sec waiting for the CB to go Half Open..."
+    sleep 25
 
     # Verify that the circuit breaker is in half open state
     assertEqual "HALF_OPEN" "$(${EXEC} wget store:8080/actuator/health -qO - | \
