@@ -1,7 +1,7 @@
 #### Start of builder image
 # ------------------------
 # Builder stage to prepare application for final image
-FROM openjdk:11-slim-buster as builder
+FROM openjdk:11-slim-buster AS builder
 WORKDIR temp
 
 # Fatjar location, but could be set to different location from command line
