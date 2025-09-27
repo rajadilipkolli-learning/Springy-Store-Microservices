@@ -29,6 +29,11 @@ spring:
     # As Spring Cloud Ribbon is in maintenance mode.
     # It is recommended switching to BlockingLoadBalancerClient instead.
     loadbalancer.ribbon.enabled: false
+    config:
+      enabled: true
+      fail-fast: true
+      retry:
+        max-attempts: 20
   # Massaging provider configurations
     stream.kafka.binder:
       brokers: ${app.messaging.kafka.broker}
@@ -86,8 +91,11 @@ logging.level:
 # docker profile
 ---
 spring:
-  profiles: docker
-  jmx.enabled: false
+  config:
+    activate:
+      on-profile: docker
+  jmx:
+    enabled: false
 
 app:
   database:

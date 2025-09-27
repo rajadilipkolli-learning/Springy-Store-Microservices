@@ -6,7 +6,6 @@ import com.siriusxi.ms.store.api.core.review.ReviewService;
 import com.siriusxi.ms.store.api.core.review.dto.Review;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
@@ -28,7 +27,6 @@ public class ReviewController implements ReviewEndpoint {
   /** Review service business logic interface. */
   private final ReviewService reviewService;
 
-  @Autowired
   public ReviewController(@Qualifier("ReviewServiceImpl") ReviewService reviewService) {
     this.reviewService = reviewService;
   }

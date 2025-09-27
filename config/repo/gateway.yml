@@ -1,6 +1,9 @@
 spring:
-  security.oauth2.resourceserver.jwt:
-    jwk-set-uri: http://${app.auth-server.host}:${app.auth-server.port}/.well-known/jwks.json
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://${app.auth-server.host}:${app.auth-server.port}/.well-known/jwks.json
   # As Spring Cloud Ribbon is in maintenance mode.
   # It is recommended switching to BlockingLoadBalancerClient instead.
   cloud:

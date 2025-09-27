@@ -5,7 +5,6 @@ import com.siriusxi.ms.store.api.core.product.ProductService;
 import com.siriusxi.ms.store.api.core.product.dto.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -27,7 +26,6 @@ public class ProductController implements ProductEndpoint {
   /** Product service business logic interface. */
   private final ProductService prodService;
 
-  @Autowired
   public ProductController(@Qualifier("ProductServiceImpl") ProductService prodService) {
     this.prodService = prodService;
   }
