@@ -48,6 +48,6 @@ ARG JAVA_OPTS=""
 
 # Run the application with JVM configs if any
 ENTRYPOINT ["bash", "-c", \
-"java -server -XX:+UseContainerSupport -XX:+ShowCodeDetailsInExceptionMessages \
+"java -server -XX:+UseContainerSupport  \
 -XX:+AlwaysActAsServerClassMachine -XX:+UseG1GC -XX:+UseStringDeduplication ${JAVA_OPTS} \
 org.springframework.boot.loader.JarLauncher ${0} ${@}"]
