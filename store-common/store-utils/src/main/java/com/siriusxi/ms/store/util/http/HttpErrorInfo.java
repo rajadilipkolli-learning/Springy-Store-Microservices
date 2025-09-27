@@ -20,13 +20,24 @@ import java.time.ZonedDateTime;
  * @version v4.6
  * @since v0.1
  */
-public record HttpErrorInfo(
-        HttpStatus httpStatus,
-        String message,
-        String path,
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
-        @JsonSerialize(using = ZonedDateTimeSerializer.class)
-        ZonedDateTime timestamp) {
+public class HttpErrorInfo {
+    private final HttpStatus httpStatus;
+    private final String message;
+    private final String path;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
+    private final ZonedDateTime timestamp;
+
+    public HttpErrorInfo(
+            HttpStatus httpStatus,
+            String message,
+            String path,
+            ZonedDateTime timestamp) {
+        this.httpStatus = httpStatus;
+        this.message = message;
+        this.path = path;
+        this.timestamp = timestamp;
+    }
 
     /**
      * Instantiates a new Http error info.
@@ -35,7 +46,12 @@ public record HttpErrorInfo(
      * @param path the request path.
      * @param message the error message.
      */
-public HttpErrorInfo(HttpStatus httpStatus, String path, String message) {
+    public HttpErrorInfo(HttpStatus httpStatus, String path, String message) {
         this(httpStatus, message, path, ZonedDateTime.now());
     }
+
+    public HttpStatus httpStatus() { return httpStatus; }
+    public String message() { return message; }
+    public String path() { return path; }
+    public ZonedDateTime timestamp() { return timestamp; }
 }

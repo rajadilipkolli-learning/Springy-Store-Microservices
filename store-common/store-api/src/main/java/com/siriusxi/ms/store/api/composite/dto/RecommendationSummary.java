@@ -13,8 +13,21 @@ package com.siriusxi.ms.store.api.composite.dto;
  * @version v4.6
  * @since v0.1
  */
-public record RecommendationSummary(int recommendationId,
-                                    String author,
-                                    int rate,
-                                    String content) {
+public class RecommendationSummary {
+    private final int recommendationId;
+    private final String author;
+    private final int rate;
+    private final String content;
+
+    public RecommendationSummary(int recommendationId, String author, int rate, String content) {
+        this.recommendationId = recommendationId;
+        this.author = author;
+        this.rate = rate;
+        this.content = content;
+    }
+
+    public int recommendationId() { return recommendationId; }
+    public String author() { return author; }
+    public int rate() { return rate; }
+    public String content() { return content; }
 }
