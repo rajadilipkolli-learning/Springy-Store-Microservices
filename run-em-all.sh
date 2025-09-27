@@ -21,7 +21,7 @@ echo -e "\nStarting [Springy Store] μServices ....\n\
 ---------------------------------------\n"
 
 function runService(){
-   ./mvnw --quiet compile spring-boot:run -Dspring-boot.run.jvmArguments="--enable-preview" -pl $1
+   ./mvnw --quiet compile spring-boot:run -pl $1
 }
 
 for dir in `find  store-services/*-service -maxdepth 0 -type d`
