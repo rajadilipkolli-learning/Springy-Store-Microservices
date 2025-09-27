@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import org.springframework.http.HttpStatus;
+import java.util.Objects;
 
 import java.time.ZonedDateTime;
 
@@ -54,4 +55,30 @@ public class HttpErrorInfo {
     public String message() { return message; }
     public String path() { return path; }
     public ZonedDateTime timestamp() { return timestamp; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HttpErrorInfo)) return false;
+        HttpErrorInfo that = (HttpErrorInfo) o;
+        return httpStatus == that.httpStatus
+                && Objects.equals(message, that.message)
+                && Objects.equals(path, that.path)
+                && Objects.equals(timestamp, that.timestamp);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(httpStatus, message, path, timestamp);
+    }
+
+    @Override
+    public String toString() {
+        return "HttpErrorInfo{" +
+                "httpStatus=" + httpStatus +
+                ", message='" + message + "'" +
+                ", path='" + path + "'" +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }
