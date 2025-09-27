@@ -32,18 +32,20 @@ public class MessageProcessor {
         log.info("Process message created at {}...", event.getEventCreatedAt());
 
         switch (event.getEventType()) {
-            case CREATE -> {
+            case CREATE: {
                 Recommendation recommendation = event.getData();
                 log.info("Create recommendation with ID: {}/{}", recommendation.getProductId(),
                         recommendation.getRecommendationId());
                 service.createRecommendation(recommendation);
+                break;
             }
-            case DELETE -> {
+            case DELETE: {
                 int productId = event.getKey();
                 log.info("Delete recommendations with ProductID: {}", productId);
                 service.deleteRecommendations(productId);
+                break;
             }
-            default -> {
+            default: {
                 String errorMessage =
                         "Incorrect event type: "
                                 .concat(valueOf(event.getEventType()))

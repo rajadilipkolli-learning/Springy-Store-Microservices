@@ -13,8 +13,21 @@ package com.siriusxi.ms.store.api.composite.dto;
  * @version v4.6
  * @since v0.1
  */
-public record ReviewSummary(int reviewId,
-                            String author,
-                            String subject,
-                            String content){
+public class ReviewSummary {
+    private final int reviewId;
+    private final String author;
+    private final String subject;
+    private final String content;
+
+    public ReviewSummary(int reviewId, String author, String subject, String content) {
+        this.reviewId = reviewId;
+        this.author = author;
+        this.subject = subject;
+        this.content = content;
+    }
+
+    public int reviewId() { return reviewId; }
+    public String author() { return author; }
+    public String subject() { return subject; }
+    public String content() { return content; }
 }

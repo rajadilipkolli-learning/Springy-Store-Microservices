@@ -1,7 +1,7 @@
 #### Start of builder image
 # ------------------------
 # Builder stage to prepare application for final image
-FROM openjdk:15-slim-buster as builder
+FROM openjdk:11-slim-buster AS builder
 WORKDIR temp
 
 # Fatjar location, but could be set to different location from command line
@@ -11,7 +11,7 @@ ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} application.jar
 
 # Extract the jar file layers
-RUN java -Djarmode=layertools -jar --enable-preview application.jar extract
+RUN java -Djarmode=layertools -jar application.jar extract
 
 # Workaround to avoid Copy command failure when directory is not exists.
 RUN if test ! -d ./snapshot-dependencies; \
@@ -22,8 +22,8 @@ else echo "Directory [snapshot-deps] already exists."; fi
 
 #### Start of actual image
 # ------------------------
-# Build image based on latest JDK 15 base image, based on latest debian buster OS
-FROM openjdk:15-slim-buster
+# Build image based on latest JDK 11 base image, based on latest debian buster OS
+FROM openjdk:11-slim-buster
 
 # Set image information, but could be set to different location from command line
 ARG IMAGE_VERSION="1.0-SNAPSHOT"
@@ -54,6 +54,6 @@ ARG JAVA_OPTS=""
 
 # Run the application with JVM configs if any
 ENTRYPOINT ["bash", "-c", \
-"java -server --enable-preview -XX:+UseContainerSupport -XX:+ShowCodeDetailsInExceptionMessages \
+"java -server -XX:+UseContainerSupport  \
 -XX:+AlwaysActAsServerClassMachine -XX:+UseG1GC -XX:+UseStringDeduplication ${JAVA_OPTS} \
 org.springframework.boot.loader.JarLauncher ${0} ${@}"]

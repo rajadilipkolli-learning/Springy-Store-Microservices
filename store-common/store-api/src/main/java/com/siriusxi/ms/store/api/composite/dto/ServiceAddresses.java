@@ -14,8 +14,22 @@ package com.siriusxi.ms.store.api.composite.dto;
  * @version v4.6
  * @since v0.1
  */
-public record ServiceAddresses( String storeService,
-                                String productService,
-                                String reviewService,
-                                String recommendationService) {
+public class ServiceAddresses {
+    private final String storeService;
+    private final String productService;
+    private final String reviewService;
+    private final String recommendationService;
+
+    public ServiceAddresses(String storeService, String productService,
+            String reviewService, String recommendationService) {
+        this.storeService = storeService;
+        this.productService = productService;
+        this.reviewService = reviewService;
+        this.recommendationService = recommendationService;
+    }
+
+    public String storeService() { return storeService; }
+    public String productService() { return productService; }
+    public String reviewService() { return reviewService; }
+    public String recommendationService() { return recommendationService; }
 }
