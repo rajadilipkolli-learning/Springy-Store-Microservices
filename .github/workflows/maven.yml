@@ -23,6 +23,25 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: |
+        # Give execute permission to scripts
+        chmod +x mvnw
+        chmod +x setup.sh
+        chmod +x test-em-all.sh
+        
+        # Setup environment
         ./setup.sh
+        
+        # Build without docker
         ./mvnw clean verify -Ddockerfile.skip
-        ./test-em-all.sh start
+        
+        # Start docker compose services
+        docker compose -p ssm up -d
+        
+        # Wait for services to be ready (extra buffer)
+        sleep 30
+        
+        # Run tests with increased timeouts
+        HOST=localhost PORT=8443 WAIT_TIME=10 RETRY_COUNT=40 ./test-em-all.sh
+        
+        # Cleanup
+        docker compose -p ssm down --remove-orphans
