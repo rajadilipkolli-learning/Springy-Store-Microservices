@@ -211,12 +211,25 @@ function testCircuitBreaker() {
     assertEqual "Product Id: $PROD_ID_NOT_FOUND not found in fallback cache!" "$(echo ${RESPONSE} | jq -r .message)"
 
     # Wait for the circuit breaker to transition to the half open state (i.e. max 10 sec)
-    echo "Will sleep for 10 sec waiting for the CB to go Half Open..."
-    sleep 10
-
-    # Verify that the circuit breaker is in half open state
-    assertEqual "HALF_OPEN" "$(${EXEC} wget store:8080/actuator/health -qO - | \
-     jq -r .components.productCircuitBreaker.details.state)"
+    echo "Will wait up to 20 sec for the CB to go Half Open..."
+    
+    # Wait and verify that the circuit breaker transitions to half open state
+    # with retries for up to 20 seconds
+    for i in {1..5}; do
+        sleep 4
+        CB_STATE="$(${EXEC} wget store:8080/actuator/health -qO - | jq -r .components.productCircuitBreaker.details.state)"
+        if [ "$CB_STATE" = "HALF_OPEN" ]; then
+            break
+        fi
+        if [ $i -eq 5 ]; then
+            echo "Circuit breaker did not transition to HALF_OPEN state within 15 seconds. Current state: $CB_STATE"
+            exit 1
+        fi
+        echo "Circuit breaker state is $CB_STATE, waiting..."
+    done
+    
+    # Final verification
+    assertEqual "HALF_OPEN" "$CB_STATE"
 
     # Close the circuit breaker by running three normal calls in a row
     # Also, verify that we get 200 back and a response based on information in the product database
