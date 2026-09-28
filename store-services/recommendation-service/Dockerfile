@@ -1,7 +1,7 @@
 #### Start of builder image
 # ------------------------
 # Builder stage to prepare application for final image
-FROM openjdk:11-slim-buster AS builder
+FROM openjdk:17-slim-buster as builder
 WORKDIR temp
 
 # Could be set to different jar file location
@@ -16,8 +16,8 @@ RUN java -Djarmode=layertools -jar application.jar extract
 
 #### Start of actual image
 # ------------------------
-# Build image based on latest JDK 11 base image, based on latest debian buster OS
-FROM openjdk:11-slim-buster
+# Build image based on latest JDK 17 base image, based on latest debian buster OS
+FROM openjdk:17-slim-buster
 
 # Set image information, but could be set to different location from command line
 ARG IMAGE_VERSION="0.0.1-SNAPSHOT"
@@ -48,6 +48,6 @@ ARG JAVA_OPTS=""
 
 # Run the application with JVM configs if any
 ENTRYPOINT ["bash", "-c", \
-"java -server -XX:+UseContainerSupport  \
+"java -server -XX:+UseContainerSupport -XX:+ShowCodeDetailsInExceptionMessages \
 -XX:+AlwaysActAsServerClassMachine -XX:+UseG1GC -XX:+UseStringDeduplication ${JAVA_OPTS} \
 org.springframework.boot.loader.JarLauncher ${0} ${@}"]
