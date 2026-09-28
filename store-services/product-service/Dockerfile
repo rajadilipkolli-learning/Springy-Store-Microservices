@@ -1,7 +1,7 @@
 #### Start of builder image
 # ------------------------
 # Builder stage to prepare application for final image
-FROM openjdk:11-slim-buster AS builder
+FROM eclipse-temurin:11-jre-jammy AS builder
 WORKDIR temp
 
 # Fatjar location, but could be set to different location from command line
@@ -17,7 +17,7 @@ RUN java -Djarmode=layertools -jar application.jar extract
 #### Start of actual image
 # ------------------------
 # Build image based on latest JDK 11 base image, based on latest debian buster OS
-FROM openjdk:11-slim-buster
+FROM eclipse-temurin:11-jre-jammy
 
 # Set image information, but could be set to different location from command line
 ARG IMAGE_VERSION="0.0.1-SNAPSHOT"
