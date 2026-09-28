@@ -30,16 +30,18 @@ public class MessageProcessor {
         log.info("Process message created at {}...", event.getEventCreatedAt());
 
         switch (event.getEventType()) {
-            case CREATE -> {
+            case CREATE: {
                 Product product = event.getData();
                 log.info("Create product with ID: {}", product.getProductId());
                 productService.createProduct(product);
+                break;
             }
-            case DELETE -> {
+            case DELETE: {
                 log.info("Delete product with Product Id: {}", event.getKey());
                 productService.deleteProduct(event.getKey());
+                break;
             }
-            default -> {
+            default: {
                 String errorMessage =
                         "Incorrect event type: "
                                 .concat(event.getEventType().toString())

@@ -197,19 +197,25 @@ public class StoreIntegration implements ProductService, RecommendationService, 
   }
 
   private Throwable handleException(Throwable ex) {
-    if (!(ex instanceof WebClientResponseException wcre)) {
+    if (!(ex instanceof WebClientResponseException)) {
       log.warn("Got a unexpected error: {}, will rethrow it", ex.toString());
       return ex;
     }
 
-    return switch (wcre.getStatusCode()) {
-      case NOT_FOUND -> new NotFoundException(getErrorMessage(wcre));
-      case UNPROCESSABLE_ENTITY -> new InvalidInputException(getErrorMessage(wcre));
-      default -> {
+    WebClientResponseException wcre = (WebClientResponseException) ex;
+
+    switch (wcre.getStatusCode()) {
+      case NOT_FOUND:
+        return new NotFoundException(getErrorMessage(wcre));
+
+      case UNPROCESSABLE_ENTITY:
+        return new InvalidInputException(getErrorMessage(wcre));
+
+      default:
         log.warn("Got a unexpected HTTP error: {}, will rethrow it", wcre.getStatusCode());
         log.warn("Error body: {}", wcre.getResponseBodyAsString());
-      throw wcre;}
-    };
+        throw wcre;
+    }
   }
 
   private String getErrorMessage(WebClientResponseException ex) {

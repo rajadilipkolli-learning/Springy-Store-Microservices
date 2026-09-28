@@ -69,16 +69,10 @@ public class RecommendationServiceImpl implements RecommendationService {
   public void deleteRecommendations(int productId) {
     isValidProductId(productId);
 
-    log.debug(
-        """ 
-           deleteRecommendations: tries to delete recommendations 
-           for the product with productId: {}
-           """,
-        productId);
-
+    log.debug("deleteRecommendations: tries to delete recommendations for the product with productId: {}", productId);
     repository
-            .deleteAll(repository.findByProductId(productId))
-            .block();
+        .deleteAll(repository.findByProductId(productId))
+        .block();
   }
 
   private void isValidProductId(int productId) {
