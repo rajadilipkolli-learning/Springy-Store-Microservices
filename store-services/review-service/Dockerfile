@@ -1,7 +1,7 @@
 #### Start of builder image
 # ------------------------
 # Builder stage to prepare application for final image
-FROM eclipse-temurin:11-jre-jammy AS builder
+FROM eclipse-temurin:25-jre-jammy AS builder
 WORKDIR temp
 
 # Could be set to different jar file location
@@ -17,7 +17,7 @@ RUN java -Djarmode=layertools -jar  application.jar extract
 #### Start of actual image
 # ------------------------
 # Build image based on latest JDK 11 base image, based on latest debian buster OS
-FROM eclipse-temurin:11-jre-jammy
+FROM eclipse-temurin:25-jre-jammy
 
 # Set image information, but could be set to different location from command line
 ARG IMAGE_VERSION="0.0.1-SNAPSHOT"
